@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 
-const Login = () => {
+const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  // Simulate login
+  // Simulate login logic
   const handleLogin = (e) => {
     e.preventDefault();
 
     if (email === 'admin@example.com' && password === 'password') {
-      // Simulate successful login (you can redirect or change state here)
-      alert('Login Successful!');
+      // Call the onLogin function to set login state in App component
+      onLogin(true);
     } else {
       setError('Invalid email or password');
     }
