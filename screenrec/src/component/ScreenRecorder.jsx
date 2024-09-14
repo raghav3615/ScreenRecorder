@@ -1,74 +1,111 @@
 import React, { useState, useRef } from 'react';
+import './ScreenRecorder.css';
 
 const ScreenRecorder = () => {
   const [isRecording, setIsRecording] = useState(false);
-  const [recordedChunks, setRecordedChunks] = useState([]);
-  const mediaRecorderRef = useRef(null);
-  const videoRef = useRef(null);
+  const [mediaRecorder, setMediaRecorder] = useState(null);
+  const [videoUrl, setVideoUrl] = useState('');
+  const recordedChunks = useRef([]);
 
-  // Start screen recording
+  // Start recording function
   const startRecording = async () => {
-    const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
-    videoRef.current.srcObject = stream;
-    
-    const mediaRecorder = new MediaRecorder(stream, {
-      mimeType: "video/webm; codecs=vp9"
-    });
+    try {
+      const stream = await navigator.mediaDevices.getDisplayMedia({
+        video: { mediaSource: 'screen' },
+        audio: false, // You can enable audio if needed
+      });
+      const recorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
 
-    mediaRecorder.ondataavailable = handleDataAvailable;
-    mediaRecorder.start();
-    mediaRecorderRef.current = mediaRecorder;
-    setIsRecording(true);
-  };
+      recorder.ondataavailable = (event) => {
+        if (event.data.size > 0) {
+          recordedChunks.current.push(event.data);
+        }
+      };
 
-  // Stop recording
-  const stopRecording = () => {
-    mediaRecorderRef.current.stop();
-    setIsRecording(false);
-  };
+      recorder.onstop = () => {
+        const blob = new Blob(recordedChunks.current, {
+          type: 'video/webm',
+        });
+        const url = URL.createObjectURL(blob);
+        setVideoUrl(url);
+        recordedChunks.current = [];
+      };
 
-  // Handle the data chunks available after recording
-  const handleDataAvailable = (event) => {
-    if (event.data.size > 0) {
-      setRecordedChunks((prev) => prev.concat(event.data));
+      recorder.start();
+      setIsRecording(true);
+      setMediaRecorder(recorder);
+    } catch (err) {
+      console.error("Error: ", err);
     }
   };
 
-  // Download the recorded video
-  const downloadVideo = () => {
-    const blob = new Blob(recordedChunks, {
-      type: "video/webm"
-    });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.style.display = "none";
-    a.href = url;
-    a.download = "screen_recording.webm";
-    document.body.appendChild(a);
-    a.click();
-    URL.revokeObjectURL(url);
-    setRecordedChunks([]); // Clear after download
+  // Stop recording function
+  const stopRecording = () => {
+    if (mediaRecorder) {
+      mediaRecorder.stop();
+      setIsRecording(false);
+    }
+  };
+
+  // Upload function (for handling video uploads)
+  const handleUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setVideoUrl(url);
+    }
   };
 
   return (
-    <div className="screen-recorder p-4">
-      <video ref={videoRef} autoPlay playsInline className="w-full h-auto border-2 border-gray-300 rounded-lg mb-4" />
-      <div className="flex space-x-2">
-        {isRecording ? (
-          <button onClick={stopRecording} className="bg-red-500 text-white py-2 px-4 rounded">
-            Stop Recording
-          </button>
-        ) : (
-          <button onClick={startRecording} className="bg-green-500 text-white py-2 px-4 rounded">
-            Start Recording
-          </button>
+    <div className="container">
+      {/* <aside className="sidebar">
+        <div className="logo">
+          <img src="path-to-logo" alt="Capture Logo" />
+          <span>Capture</span>
+        </div>
+        <nav className="nav">
+          <a href="#" className="nav-item active">
+            <i className="icon-home"></i> Home
+          </a>
+          <a href="#" className="nav-item">
+            <i className="icon-folder"></i> Files
+          </a>
+          <a href="#" className="nav-item">
+            <i className="icon-settings"></i> Settings
+          </a>
+        </nav>
+        <div className="support-links">
+          <a href="#">Help</a>
+          <a href="#">Support</a>
+        </div>
+      </aside> */}
+      <main className="main-content">
+        <header className="header">
+          <h2>Record a new Video</h2>
+          <p>Click the button below to record a new video</p>
+        </header>
+        <div className="action-buttons">
+          {!isRecording ? (
+            <button className="btn record-btn" onClick={startRecording}>
+              <i className="icon-record"></i> Record
+            </button>
+          ) : (
+            <button className="btn stop-btn" onClick={stopRecording}>
+              <i className="icon-stop"></i> Stop
+            </button>
+          )}
+          <label className="btn upload-btn">
+            <i className="icon-upload"></i> Upload
+            <input type="file" accept="video/*" onChange={handleUpload} style={{ display: 'none' }} />
+          </label>
+        </div>
+        {videoUrl && (
+          <div className="video-preview">
+            <h3>Preview:</h3>
+            <video src={videoUrl} controls width="600"></video>
+          </div>
         )}
-      </div>
-      {recordedChunks.length > 0 && (
-        <button onClick={downloadVideo} className="mt-4 bg-blue-500 text-white py-2 px-4 rounded">
-          Download Video
-        </button>
-      )}
+      </main>
     </div>
   );
 };
