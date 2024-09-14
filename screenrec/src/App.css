@@ -1,42 +1,134 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
+/* General Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f4f4; /* Light Mode */
+  position: relative;
+}
+
+body.dark-mode {
+  background-color: #111827; /* Dark Mode Background */
+  color: white;
+}
+
+/* Separate Dark Mode Button Styling */
+.dark-mode-toggle-btn {
+  position: absolute;
+  width: 20%;
+  top: 2px;
+  right: 2px;
+  background-color: transparent;
+  border: none;
+  font-size: 1.75rem;
+  cursor: pointer;
+  color: #4b5563;
+  transition: transform 0.2s ease, color 0.3s ease;
+}
+
+.dark-mode-toggle-btn:hover {
+  transform: scale(1.1);
+  color: #2563eb;
+}
+
+body.dark-mode .dark-mode-toggle-btn {
+  color: #f3f4f6;
+}
+
+/* Form Container Centering */
+.form-container {
+  background-color: white;
+  border-radius: 0.75rem;
   padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+}
+
+body.dark-mode .form-container {
+  background-color: #1f2937; /* Dark Mode Form Background */
+}
+
+/* Heading */
+h2 {
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  font-weight: 700;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Input Fields */
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background-color: #f9f9f9;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+body.dark-mode input[type="email"],
+body.dark-mode input[type="password"],
+body.dark-mode input[type="text"] {
+  background-color: #374151;
+  color: white;
+  border-color: #4b5563;
 }
 
-.card {
-  padding: 2em;
+/* Form Submit Button */
+button {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background-color: #2563eb;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.read-the-docs {
-  color: #888;
+/* button:hover {
+  background-color: white;
+} */
+
+/* body.dark-mode button {
+  background-color: #3b82f6;
+} */
+
+/* Error message styling */
+.error-message {
+  color: #f87171;
+  margin-bottom: 1rem;
+}
+
+/* Signup Link */
+.signup-link {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.signup-link a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
+
+body.dark-mode .signup-link a {
+  color: #93c5fd;
 }
