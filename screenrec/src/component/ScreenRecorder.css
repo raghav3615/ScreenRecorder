@@ -114,7 +114,7 @@ body, html {
 .upload-btn {
   background-color: #7b7b7b;
   color: white;
-  position: relative;
+  position: pointer;
 }
 
 .upload-btn input {

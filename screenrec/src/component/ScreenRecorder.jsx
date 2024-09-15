@@ -89,13 +89,22 @@ const ScreenRecorder = () => {
         </div>
 
         <div className="action-buttons">
+          {/* Record Button */}
           <button className="btn record-btn" onClick={startRecording}>
             <i className="icon-record"></i> Record
           </button>
-          <button className="btn upload-btn">
+
+          {/* Upload Button */}
+          <label className="btn upload-btn" htmlFor="videoUpload">
             <i className="icon-upload"></i> Upload
-            <input type="file" accept="video/*" onChange={handleUpload} style={{ display: 'none' }} />
-          </button>
+          </label>
+          <input
+            type="file"
+            accept="video/*"
+            id="videoUpload"
+            onChange={handleUpload}
+            style={{ display: 'none' }} // Hidden input field
+          />
         </div>
 
         {videoUrl && (
