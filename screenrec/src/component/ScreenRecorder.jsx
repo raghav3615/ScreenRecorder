@@ -12,7 +12,7 @@ const ScreenRecorder = () => {
     try {
       const stream = await navigator.mediaDevices.getDisplayMedia({
         video: { mediaSource: 'screen' },
-        audio: false, // You can enable audio if needed
+        audio: false,
       });
       const recorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
 
@@ -23,9 +23,7 @@ const ScreenRecorder = () => {
       };
 
       recorder.onstop = () => {
-        const blob = new Blob(recordedChunks.current, {
-          type: 'video/webm',
-        });
+        const blob = new Blob(recordedChunks.current, { type: 'video/webm' });
         const url = URL.createObjectURL(blob);
         setVideoUrl(url);
         recordedChunks.current = [];
@@ -35,7 +33,7 @@ const ScreenRecorder = () => {
       setIsRecording(true);
       setMediaRecorder(recorder);
     } catch (err) {
-      console.error("Error: ", err);
+      console.error('Error: ', err);
     }
   };
 
@@ -58,9 +56,9 @@ const ScreenRecorder = () => {
 
   return (
     <div className="container">
-      {/* <aside className="sidebar">
+      <aside className="sidebar">
         <div className="logo">
-          <img src="path-to-logo" alt="Capture Logo" />
+          <img src=".\img\logo scnrec.png" alt="Capture Logo" />
           <span>Capture</span>
         </div>
         <nav className="nav">
@@ -78,27 +76,28 @@ const ScreenRecorder = () => {
           <a href="#">Help</a>
           <a href="#">Support</a>
         </div>
-      </aside> */}
+      </aside>
+
       <main className="main-content">
         <header className="header">
           <h2>Record a new Video</h2>
           <p>Click the button below to record a new video</p>
         </header>
+
+        <div className="illustration">
+          <img src=".\img\dashboard.png" alt="Illustration" />
+        </div>
+
         <div className="action-buttons">
-          {!isRecording ? (
-            <button className="btn record-btn" onClick={startRecording}>
-              <i className="icon-record"></i> Record
-            </button>
-          ) : (
-            <button className="btn stop-btn" onClick={stopRecording}>
-              <i className="icon-stop"></i> Stop
-            </button>
-          )}
-          <label className="btn upload-btn">
+          <button className="btn record-btn" onClick={startRecording}>
+            <i className="icon-record"></i> Record
+          </button>
+          <button className="btn upload-btn">
             <i className="icon-upload"></i> Upload
             <input type="file" accept="video/*" onChange={handleUpload} style={{ display: 'none' }} />
-          </label>
+          </button>
         </div>
+
         {videoUrl && (
           <div className="video-preview">
             <h3>Preview:</h3>
