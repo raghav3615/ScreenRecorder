@@ -80,7 +80,7 @@ const ScreenRecorder = () => {
 
       <main className="main-content">
         <header className="header">
-          <h2>Record a new Video</h2>
+          <h2>Record a Video</h2>
           <p>Click the button below to record a new video</p>
         </header>
 
