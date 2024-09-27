@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import ScreenRecorder from './component/ScreenRecorder';
-// import Login from './component/login';
-// import Signup from './component/Signup'; 
+import Login from './component/login';
+import Signup from './component/Signup'; 
 
 import './App.css';
 
