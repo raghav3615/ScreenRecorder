@@ -61,6 +61,11 @@ const Login = ({ onLogin }) => {
         <button type="submit">Login</button>
       </form>
 
+      {/* OR Separator */}
+      <div className="or-separator">
+        <span>or</span>
+      </div>
+
       {/* Google Login Button */}
       <button className="google-login-btn" onClick={handleGoogleLogin}>
         <span className="google-emoji">🔑</span> Login with Google

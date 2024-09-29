@@ -112,6 +112,26 @@ body.dark-mode button:hover {
   background-color: #2563eb;
 }
 
+/* OR Separator */
+.or-separator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1.5rem 0;
+  font-size: 1rem;
+  color: #6b7280; /* Gray color */
+}
+
+.or-separator span {
+  padding: 0 1rem;
+  background-color: white; /* Match form background */
+  position: relative;
+}
+
+body.dark-mode .or-separator span {
+  background-color: #1f2937; /* Dark Mode Form Background */
+  color: #d1d5db; /* Light Gray */
+}
 /* Google Login Button */
 .google-login-btn {
   margin-top: 1rem;
