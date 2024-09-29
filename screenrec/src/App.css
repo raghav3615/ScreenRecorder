@@ -118,7 +118,7 @@ body.dark-mode button:hover {
   justify-content: center;
   align-items: center;
   margin: 1.5rem 0;
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: #6b7280; /* Gray color */
 }
 
@@ -128,33 +128,17 @@ body.dark-mode button:hover {
   position: relative;
 }
 
-body.dark-mode .or-separator span {
-  background-color: #1f2937; /* Dark Mode Form Background */
-  color: #d1d5db; /* Light Gray */
-}
-/* Google Login Button */
-.google-login-btn {
-  margin-top: 1rem;
-  background-color: #db4437;
-  color: white;
-  padding: 0.75rem;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  border: none;
-  cursor: pointer;
+/* Container for centering the Google button */
+.google-button-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background-color 0.3s ease;
+  margin-top: 1.5rem; /* Adjust the margin as needed */
 }
 
-.google-login-btn:hover {
-  background-color: #c33d2e;
-}
-
-.google-login-btn .google-emoji {
-  margin-right: 0.5rem;
-  font-size: 1.5rem;
+body.dark-mode .or-separator span {
+  background-color: #1f2937; /* Dark Mode Form Background */
+  color: #d1d5db; /* Light Gray */
 }
 
 body.dark-mode .google-login-btn {

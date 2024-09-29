@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import GoogleButton from 'react-google-button'
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
@@ -67,9 +68,16 @@ const Login = ({ onLogin }) => {
       </div>
 
       {/* Google Login Button */}
-      <button className="google-login-btn" onClick={handleGoogleLogin}>
+      <div className="google-button-container">
+        <GoogleButton
+          onClick={() => { console.log('Google button clicked') }}
+          />
+      </div>
+
+
+      {/* <button className="google-login-btn" onClick={handleGoogleLogin}>
         <span className="google-emoji">🔑</span> Login with Google
-      </button>
+      </button> */}
 
       <div className="signup-link">
         <p>
