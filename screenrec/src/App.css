@@ -100,18 +100,6 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #1d4ed8;
-}
-
-body.dark-mode button {
-  background-color: #3b82f6;
-}
-
-body.dark-mode button:hover {
-  background-color: #2563eb;
-}
-
 /* OR Separator */
 .or-separator {
   display: flex;
