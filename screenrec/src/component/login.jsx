@@ -22,6 +22,11 @@ const Login = ({ onLogin }) => {
     document.body.classList.toggle('dark-mode');
   };
 
+  const handleGoogleLogin = () => {
+    // Implement Google Login functionality
+    alert('Google login triggered');
+  };
+
   return (
     <div className="form-container">
       {/* Separate Dark Mode Button */}
@@ -55,6 +60,11 @@ const Login = ({ onLogin }) => {
         {error && <p className="error-message">{error}</p>}
         <button type="submit">Login</button>
       </form>
+
+      {/* Google Login Button */}
+      <button className="google-login-btn" onClick={handleGoogleLogin}>
+        <span className="google-emoji">🔑</span> Login with Google
+      </button>
 
       <div className="signup-link">
         <p>
