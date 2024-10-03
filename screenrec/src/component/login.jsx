@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import GoogleButton from 'react-google-button'
+import GoogleButton from 'react-google-button';
+import { auth, googleProvider } from '.src\firebase.js'; // Import Firebase config
+import { signInWithPopup } from 'firebase/auth';
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
@@ -10,7 +12,6 @@ const Login = ({ onLogin }) => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-
     if (email === 'admin@example.com' && password === 'password') {
       onLogin(true);
     } else {
@@ -24,13 +25,21 @@ const Login = ({ onLogin }) => {
   };
 
   const handleGoogleLogin = () => {
-    // Implement Google Login functionality
-    alert('Google login triggered');
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        // Handle successful login, e.g., redirect the user
+        console.log('User signed in with Google:', result.user);
+        onLogin(true); // Call the onLogin prop to update state in the parent
+      })
+      .catch((error) => {
+        console.error('Google Sign-In Error:', error);
+        setError('Google Sign-In failed. Please try again.');
+      });
   };
 
   return (
     <div className="form-container">
-      {/* Separate Dark Mode Button */}
+      {/* Dark Mode Button */}
       <button className="dark-mode-toggle-btn" onClick={toggleDarkMode}>
         {darkMode ? '🌞' : '🌙'}
       </button>
@@ -69,15 +78,8 @@ const Login = ({ onLogin }) => {
 
       {/* Google Login Button */}
       <div className="google-button-container">
-        <GoogleButton
-          onClick={() => { console.log('Google button clicked') }}
-          />
+        <GoogleButton onClick={handleGoogleLogin} />
       </div>
-
-
-      {/* <button className="google-login-btn" onClick={handleGoogleLogin}>
-        <span className="google-emoji">🔑</span> Login with Google
-      </button> */}
 
       <div className="signup-link">
         <p>
