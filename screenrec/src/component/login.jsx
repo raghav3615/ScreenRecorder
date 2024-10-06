@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import GoogleButton from 'react-google-button';
-import { auth, googleProvider } from '.src\firebase.js'; // Import Firebase config
+import { auth, googleProvider } from '../firebase';// Import Firebase config
 import { signInWithPopup } from 'firebase/auth';
 
 const Login = ({ onLogin }) => {
