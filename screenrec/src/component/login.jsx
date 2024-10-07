@@ -45,7 +45,7 @@ const Login = ({ onLogin }) => {
       </button>
 
       {/* Form Content */}
-      <h2>Login Page</h2>
+      <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <div className="mb-4">
           <label htmlFor="email" className="block font-semibold mb-2">Email</label>
