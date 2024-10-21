@@ -58,7 +58,7 @@ const ScreenRecorder = () => {
     <div className="container">
       <aside className="sidebar">
         <div className="logo">
-          <img src=".\img\logo scnrec.png" alt="Capture Logo" />
+          <img src="/logo-scnrec.png" alt="Capture Logo" />
           <span>Capture</span>
         </div>
         <nav className="nav">
@@ -85,7 +85,7 @@ const ScreenRecorder = () => {
         </header>
 
         <div className="illustration">
-          <img src=".\img\dashboard.png" alt="Illustration" />
+          <img src="/dashboard.png" alt="Illustration" />
         </div>
 
         <div className="action-buttons">
